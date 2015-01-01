@@ -1,5 +1,5 @@
 function Server(config){
-    var geometry = new THREE.BoxGeometry( 2, 2, 2 );
+    var geometry = new THREE.BoxGeometry( 8, 1, 8 );
     var material =  Physijs.createMaterial(
         new THREE.MeshLambertMaterial({ map: loader.load( 'images/server.jpg' )}),
         .4, // medium friction

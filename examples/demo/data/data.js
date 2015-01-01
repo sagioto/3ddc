@@ -1,4 +1,4 @@
-{
+var inventory = {
   "datacenters" : [
     {
       "name" : "DC1",

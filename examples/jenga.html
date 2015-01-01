@@ -10,11 +10,14 @@
 	<script type="text/javascript" src="js/three.js"></script>
 	<script type="text/javascript" src="js/stats.js"></script>
 	<script type="text/javascript" src="../physi.js"></script>
+	<script type="text/javascript" src="js/orbitControl.js"></script>
 
+	<script type="text/javascript" src="demo/data/data.js"></script>
 	<script type="text/javascript" src="demo/objects/baseEntity.js"></script>
 	<script type="text/javascript" src="demo/objects/server.js"></script>
 	<script type="text/javascript" src="demo/objects/vm.js"></script>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="demo/services/inventoryBuilder.js"></script>
 
 	<script type="x-shader/x-vertex" id="vertexShader">
 
@@ -49,10 +52,10 @@
 
 		</script>
 
+
 	<script type="text/javascript">
 
 	'use strict';
-
 	Physijs.scripts.worker = '../physijs_worker.js';
 	Physijs.scripts.ammo = 'examples/js/ammo.js';
 
@@ -125,6 +128,9 @@
 			}
 		);
 
+
+
+
 		camera = new THREE.PerspectiveCamera(
 			35,
 			window.innerWidth / window.innerHeight,
@@ -133,6 +139,10 @@
 		);
 		camera.position.set( 25, 20, 25 );
 		camera.lookAt(new THREE.Vector3( 0, 7, 0 ));
+		var controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls.target.set( 0, 0, 0 ); // view direction perpendicular to XY-plane
+		controls.enableRotate = false;
+		controls.enableZoom = true; // optional
 		scene.add( camera );
 
 		// ambient light
@@ -240,14 +250,14 @@
 		return function() {
 			var i, j, rows = 16,
 				block;
-
+			InventoryBuilder.buildWorld({
+				scene:scene
+			});
 			var server = new Server({name:"test"});
-			server.receiveShadow = true;
-			server.castShadow = true;
 			server.position.y = 3;
 			server.position.x = 3;
-			blocks.push(server);
-			scene.add( server );
+			//blocks.push(server);
+			//scene.add( server );
 			for ( i = 0; i < rows; i++ ) {
 				for ( j = 0; j < 3; j++ ) {
 					block = new VM({name:"test"});
