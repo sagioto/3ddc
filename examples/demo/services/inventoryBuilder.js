@@ -3,9 +3,6 @@ function InventoryBuilder(config){
 }
 
 InventoryBuilder.buildWorld = function(config){
-    /*inventory.datacenters.forEach(function(datcenter){
-
-    });*/
     var scene = config.scene;
 
     var dc = inventory.datacenters[0];
@@ -17,20 +14,16 @@ InventoryBuilder.buildWorld = function(config){
         currServer.position.x = startX + (index * Server.prototype.width * 2);
         currServer.position.y = 2;
         scene.add(currServer);
-        var deltaX=0;
-        var numOfvms = server.vms.length;
         var vmStartX = currServer.position.x;
         var vmStartY = Server.prototype.height;
         var vmStartZ = currServer.position.z;
         server.vms.forEach(function(vm,index){
-            var width =  (index % 2) * VM.prototype.width;
-            var vm = new VM({name:vm.name});
-            vm.position.x = vmStartX + width;
-            vm.position.y = vmStartY + VM.prototype.height;
-            vm.position.z = vmStartZ + width;
-            deltaX+=vm.geometry.parameters.width +1;
-            scene.add(vm);
-            config.vms.push(vm);
+            var currVm = new VM({name: vm.name});
+            currVm.position.x = vmStartX + ((index % 2) * VM.prototype.width) + (VM.prototype.width / -2);
+            currVm.position.y = vmStartY + VM.prototype.height;
+            currVm.position.z = vmStartZ + (Math.floor(index / 2) * VM.prototype.depth) + (VM.prototype.depth / -2);
+            scene.add(currVm);
+            config.vms.push(currVm);
         });
 
     });
