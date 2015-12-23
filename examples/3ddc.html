@@ -58,7 +58,7 @@
 	'use strict';
 	Physijs.scripts.worker = '../physijs_worker.js';
 	Physijs.scripts.ammo = 'examples/js/ammo.js';
-
+	var shouldZoom = true;
 	var initScene, initEventHandling, render, craeateInventory, loader,
 		renderer, render_stats, physics_stats, scene,backgroundScene, backgroundCamera, dir_light, am_light, camera,
 		table, vms = [], table_material, block_material, intersect_plane,
@@ -138,7 +138,7 @@
 			1,
 			1000
 		);
-		camera.position.set( 25, 20, 25 );
+		camera.position.set( 180, 180, 180 );
 		camera.lookAt(new THREE.Vector3( 0, 7, 0 ));
 		var controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.target.set( 0, 0, 0 ); // view direction perpendicular to XY-plane
@@ -272,6 +272,12 @@
 	};
 
 	render = function() {
+		if(shouldZoom){
+			camera.position.set( camera.position.x - 2, camera.position.y - 2, camera.position.z - 2);
+			if(camera.position.x < 25){
+				shouldZoom = false;
+			}
+		}
 		requestAnimationFrame( render );
 		renderer.autoClear = false;
 		renderer.clear();
