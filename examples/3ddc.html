@@ -59,7 +59,7 @@
 	Physijs.scripts.worker = '../physijs_worker.js';
 	Physijs.scripts.ammo = 'examples/js/ammo.js';
 	var shouldZoom = true;
-	var initScene, initEventHandling, render, craeateInventory, loader,
+	var initScene, initEventHandling, render, createInventory, loader,
 		renderer, render_stats, physics_stats, scene, controls,backgroundScene, backgroundCamera, dir_light, am_light, camera,
 		table, vms = [], table_material, block_material, intersect_plane,
 		selected_block = null, mouse_position = new THREE.Vector3, block_offset = new THREE.Vector3, _i, _v3 = new THREE.Vector3;
@@ -254,7 +254,7 @@
 		table.receiveShadow = true;
 		scene.add( table );
 
-		craeateInventory();
+		createInventory();
 
 		intersect_plane = new THREE.Mesh(
 			new THREE.PlaneGeometry( 150, 150 ),
@@ -273,7 +273,7 @@
 
 	render = function() {
 		if(shouldZoom){
-			camera.position.set( camera.position.x - 2, camera.position.y - 2, camera.position.z - 2);
+			camera.position.set( camera.position.x - 3, camera.position.y - 3, camera.position.z - 3);
 			if(camera.position.x < 25){
 				shouldZoom = false;
 			}
@@ -286,7 +286,7 @@
 		render_stats.update();
 	};
 
-	craeateInventory = (function() {
+	createInventory = (function() {
 		var block_height = 1, block_offset = 2;
 		return function() {
 			var i, j, rows = 16,
