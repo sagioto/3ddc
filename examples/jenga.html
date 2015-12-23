@@ -3,7 +3,7 @@
 <html>
 
 <head>
-	<title>Jenga - Physijs</title>
+	<title>3D - DC</title>
 
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
 
@@ -14,6 +14,39 @@
 	<script type="text/javascript" src="demo/objects/baseEntity.js"></script>
 	<script type="text/javascript" src="demo/objects/server.js"></script>
 	<script type="text/javascript" src="demo/objects/vm.js"></script>
+
+	<script type="x-shader/x-vertex" id="vertexShader">
+
+			varying vec3 vWorldPosition;
+
+			void main() {
+
+				vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+				vWorldPosition = worldPosition.xyz;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+
+		</script>
+
+	<script type="x-shader/x-fragment" id="fragmentShader">
+
+			uniform vec3 topColor;
+			uniform vec3 bottomColor;
+			uniform float offset;
+			uniform float exponent;
+
+			varying vec3 vWorldPosition;
+
+			void main() {
+
+				float h = normalize( vWorldPosition + offset ).y;
+				gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( max( h, 0.0 ), exponent ), 0.0 ) ), 1.0 );
+
+			}
+
+		</script>
 
 	<script type="text/javascript">
 
@@ -32,7 +65,10 @@
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		renderer.shadowMap.enabled = true;
 		renderer.shadowMapSoft = true;
+		renderer.setClearColor('#99ccff');
 		document.getElementById( 'viewport' ).appendChild( renderer.domElement );
+
+
 
 		render_stats = new Stats();
 		render_stats.domElement.style.position = 'absolute';
@@ -86,7 +122,7 @@
 
 		// directional light
 		dir_light = new THREE.DirectionalLight( 0xFFFFFF );
-		dir_light.position.set( 20, 30, -5 );
+		dir_light.position.set( 20, 30, 10 );
 		dir_light.target.position.copy( scene.position );
 		dir_light.castShadow = true;
 		dir_light.shadowCameraLeft = -30;
@@ -95,17 +131,40 @@
 		dir_light.shadowCameraBottom = 30;
 		dir_light.shadowCameraNear = 20;
 		dir_light.shadowCameraFar = 200;
-		dir_light.shadowBias = -.001
+		dir_light.shadowBias = -.001;
 		dir_light.shadowMapWidth = dir_light.shadowMapHeight = 2048;
 		dir_light.shadowDarkness = .5;
 		scene.add( dir_light );
+
+		// SKYDOME
+
+		var vertexShader = document.getElementById( 'vertexShader' ).textContent;
+		var fragmentShader = document.getElementById( 'fragmentShader' ).textContent;
+		var uniforms = {
+			topColor: 	 { type: "c", value: new THREE.Color( 0x0077ff ) },
+			bottomColor: { type: "c", value: new THREE.Color( 0xffffff ) },
+			offset:		 { type: "f", value: 400 },
+			exponent:	 { type: "f", value: 0.6 }
+		};
+		uniforms.topColor.value.copy( dir_light.color );
+
+		var skyGeo = new THREE.SphereGeometry( 4000, 32, 15 );
+		var skyMat = new THREE.ShaderMaterial( {
+			uniforms: uniforms,
+			vertexShader: vertexShader,
+			fragmentShader: fragmentShader,
+			side: THREE.BackSide
+		} );
+
+		var sky = new THREE.Mesh( skyGeo, skyMat );
+		scene.add( sky );
 
 		// Loader
 		loader = new THREE.TextureLoader();
 
 		// Materials
 		table_material = Physijs.createMaterial(
-			new THREE.MeshLambertMaterial({ map: loader.load( 'images/wood.jpg' )}),
+			new THREE.MeshLambertMaterial({ map: loader.load( 'images/steel.jpg' )}),
 			.9, // high friction
 			.2 // low restitution
 		);
@@ -113,7 +172,7 @@
 		table_material.map.repeat.set( 5, 5 );
 
 		block_material = Physijs.createMaterial(
-			new THREE.MeshLambertMaterial({ map: loader.load( 'images/plywood.jpg' )}),
+			new THREE.MeshLambertMaterial({ map: loader.load( 'images/wood.jpg' )}),
 			.4, // medium friction
 			.4 // medium restitution
 		);
@@ -266,10 +325,6 @@
 </head>
 
 <body>
-	<div id="heading">
-		<h1>Jenga</h1>
-		<p>Click & drag on the blocks to move them around.</p>
-	</div>
 	<div id="viewport"></div>
 </body>
 

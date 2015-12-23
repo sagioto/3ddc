@@ -1,7 +1,7 @@
 function VM(config){
     var geometry = new THREE.BoxGeometry( 10, 10, 10 );
     var material =  Physijs.createMaterial(
-        new THREE.MeshLambertMaterial({ map: loader.load( 'images/plywood.jpg' )}),
+        new THREE.MeshLambertMaterial({ map: loader.load( 'images/vm.jpg' )}),
         .4, // medium friction
         .4 // medium restitution
     );
