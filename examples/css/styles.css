@@ -39,6 +39,7 @@ body {
 	margin-left: 80px;
 	padding: 0;
 	color: white;
+	overflow: auto;
 }
 
 #addVmForm{
@@ -52,7 +53,6 @@ body {
 	color: white;
 	text-align: left;
 	border: white solid;
-	visibility: hidden;
 
 }
 

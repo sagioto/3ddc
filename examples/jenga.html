@@ -391,28 +391,56 @@
 	</div>
 
 	<script type="text/javascript">
-		$("li").click(function(){
-			var server = new Server({name:"abc"});
-			server.receiveShadow = true;
-			server.castShadow = true;
-			server.position.y = 7;
-			server.position.x = 7;
-			scene.add( server );
-		});
+		$(function () {
+			var clicked = false;
+			$("#vmList li").hide();
+			$("#addVmForm").hide();
 
-		$("input").click(function(){
-			$("#addVmForm").css('visibility', 'visible');
-		});
+			$("ul").delegate( "li", "click", function() {
+				var vmName = $(this).text();
+				var vm = new VM({name: vmName});
+				vm.receiveShadow = true;
+				vm.castShadow = true;
+				var position = getAvailableVmPosition();
+				vm.position.y = position[0];
+				vm.position.x = position[1];
+				scene.add(vm);
+			});
 
-		$("#addVmButton").click(function(){
-			var vmName = $('input[name="vmName"]').val();
-			$("#vmList").append('<li>' + vmName + '</li>');
-			$("#addVmForm").css('visibility', 'hidden');
-		});
-		$("#cancelAddVmButton").click(function(){
-			$("#addVmForm").css('visibility', 'hidden');
-		});
+			$("#addVm input").click(function () {
+				clicked = true;
+				$("#vmList li").show();
+				$("#addVmForm").show();
+			});
 
+			$("#addVmButton").click(function () {
+				$("#addVmForm").show();
+				var vmName = $('input[name="vmName"]').val();
+				$("#vmList").append('<li>' + vmName + '</li>');
+				$("#addVmForm").hide();
+				clicked = false;
+				$("#vmList li").hide(800);
+
+			});
+			$("#cancelAddVmButton").click(function () {
+				$("#addVmForm").hide();
+			});
+
+			$("#addVm").hover(function () {
+				$("#vmList li").show(800);
+			}).mouseleave(function (){
+				if (!clicked){
+					$("#vmList li").hide();
+				}
+			});
+
+			var getAvailableVmPosition = function(){
+				//find an a available spot on a server and
+				//return it's x,y
+				return [3,3];
+			}
+
+		});
 	</script>
 
 </body>
