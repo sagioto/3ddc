@@ -30,6 +30,20 @@ body {
 	color: #4488ff;
 }
 
+#dcTitle {
+	text-shadow: 2px 2px 3px #222;
+	width: 500px;
+	height: 200px;
+	position: absolute;
+	top: 0;
+	margin-top: 15px;
+	margin-left: 140px;
+	padding: 0;
+	color: white;
+	overflow: auto;
+	font-size: 3.5em;
+}
+
 
 /**********************   Add vm panel ********************** */
 #addVmDiv{
@@ -38,8 +52,8 @@ body {
 	height: 200px;
 	position: absolute;
 	top: 0;
-	margin-top: 200px;
-	margin-left: 80px;
+	margin-top: 130px;
+	margin-left: 50px;
 	padding: 0;
 	color: white;
 	overflow: auto;
@@ -48,14 +62,14 @@ body {
 #addVmForm{
 	width: 300px;
 	height: 200px;
-	background: black;
+	background: rgba(0,0,0,0.5);
 	position: absolute;
 	top: 180px;
-	left: 400px;
+	left: 300px;
 	padding: 10px;
 	color: white;
 	text-align: left;
-	border: white solid;
+	box-shadow: 5px 5px 5px black;
 
 }
 

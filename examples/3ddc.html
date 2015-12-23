@@ -11,6 +11,8 @@
 	<script type="text/javascript" src="js/stats.js"></script>
 	<script type="text/javascript" src="../physi.js"></script>
 	<script type="text/javascript" src="js/orbitControl.js"></script>
+	<script type="text/javascript" src="js/geometries/TextGeomerty.js"></script>
+	<script type="text/javascript" src="js/utils/FontUtils.js"></script>
 
 	<script type="text/javascript" src="demo/data/data.js"></script>
 	<script type="text/javascript" src="demo/objects/baseEntity.js"></script>
@@ -409,6 +411,10 @@
 <body>
 	<div id="viewport"></div>
 
+	<div id="dcTitle">
+		<p></p>
+	</div>
+
 	<div id="addVmDiv">
 		<p>Add a VM</p>
 		<input type="button" name="addVm" value="+" class="addVm">
@@ -437,6 +443,9 @@
 
 	<script type="text/javascript">
 		$(function () {
+
+			$("body").animate({scrollBottom: 200},1000);
+
 			var clicked = false;
 			$("#vmList li").hide();
 			$("#addVmForm").hide();
@@ -445,8 +454,9 @@
 				var vmName = $(this).text();
 				var vm = new VM({name: vmName});
 				var position = getAvailableVmPosition();
-				vm.position.y = position[0];
-				vm.position.x = position[1];
+				vm.position.x = position[0];
+				vm.position.y = position[1];
+				vm.position.z = position[2];
 				scene.add(vm);
 			});
 
@@ -481,8 +491,10 @@
 
 			var getAvailableVmPosition = function(){
 				//find an a available spot on a server and
-				//return it's x,y
-				return [8,8];
+				//return it's x,y,z
+				var x = Math.floor(Math.random() * 50) - 25;
+				var z = Math.floor(Math.random() * 50) - 25;
+				return [x,1,z];
 			}
 
 		});
