@@ -97,3 +97,13 @@ form input {
 	float: right;
 	margin-right: 40px;
 }
+.logo{
+	position: fixed;
+	top: 15px;
+	left: 0px;
+	height: 60px;
+	width: 150px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-image: url('../images/logo.png');
+}

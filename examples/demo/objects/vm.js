@@ -1,18 +1,7 @@
 function VM(config){
     var geometry = new THREE.BoxGeometry( VM.prototype.width, VM.prototype.height, VM.prototype.depth );
 
-    var x = document.createElement("canvas");
-    var xc = x.getContext("2d");
-    x.width = x.height = 128;
-    xc.shadowColor = "#000";
-    xc.fillStyle = config.status == 'online' ? '#6BB445' : 'red';
-    xc.fillRect(0, 0, 128, 128);
-    xc.fillStyle = "black";
-    xc.font = "30pt arial bold";
-    xc.fillText(config.name, 10, 64);
-    var xm = new THREE.MeshLambertMaterial({ map: new THREE.Texture(x), transparent: false });
-    xm.map.needsUpdate = true;
-
+    var xm = this.createText(config);
     var material =  Physijs.createMaterial(
         xm,
         .9, // medium friction
