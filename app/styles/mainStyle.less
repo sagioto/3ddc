@@ -1,0 +1,70 @@
+@import "../../node_modules/bootstrap/less/bootstrap.less";
+@import "../../node_modules/font-awesome/less/font-awesome.less";
+@import "_vars.less";
+@import "_navBar.less";
+@import "_sideBar.less";
+@import "_parents.less";
+
+body{
+  font-family: "Helvetic Neue", Helvetica, Arial;
+}
+
+#wrapper {
+
+  left: 70px;
+  transition: all .4s ease 0s;
+  position: absolute;
+  top: 50px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.rtlDirection #wrapper {
+
+  right: 70px;
+  left: 0px;
+}
+
+
+.navbar-fixed-top{
+  z-index: 99999;
+}
+
+#wrapper.active {
+  left: 150px;
+}
+#wrapper.active #sidebar-wrapper {
+  left: 150px;
+}
+.rtlDirection #wrapper.active {
+  right: 150px;
+  left: 0px;
+}
+.rtlDirection #wrapper.active #sidebar-wrapper {
+  right: 150px;
+  left: 0px;
+}
+
+.rtlDirection{
+  direction: rtl;
+}
+.rtlDirection .localeFloatingElement{
+  float: right !important;
+}
+.rtlDirection .navbar-header {
+  float: right !important;
+}
+.rtlDirection .navbar-right{
+  float: left !important;
+}
+.rtlDirection .navbar-left {
+  float: right !important;
+}
+.rtlDirection .navbar-nav > li {
+  float: right;
+}
+
+
+
+
+
