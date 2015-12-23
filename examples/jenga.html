@@ -61,7 +61,7 @@
 
 	var initScene, initEventHandling, render, createTower, loader,
 		renderer, render_stats, physics_stats, scene,backgroundScene, backgroundCamera, dir_light, am_light, camera,
-		table, blocks = [], table_material, block_material, intersect_plane,
+		table, vms = [], table_material, block_material, intersect_plane,
 		selected_block = null, mouse_position = new THREE.Vector3, block_offset = new THREE.Vector3, _i, _v3 = new THREE.Vector3;
 
 	initScene = function() {
@@ -116,10 +116,10 @@
 					_v3.y = 0;
 					selected_block.setLinearVelocity( _v3 );
 
-					// Reactivate all of the blocks
+					// Reactivate all of the vms
 					_v3.set( 0, 0, 0 );
-					for ( _i = 0; _i < blocks.length; _i++ ) {
-						blocks[_i].applyCentralImpulse( _v3 );
+					for ( _i = 0; _i < vms.length; _i++ ) {
+						vms[_i].applyCentralImpulse( _v3 );
 					}
 				}
 
@@ -188,6 +188,40 @@
 		var sky = new THREE.Mesh( skyGeo, skyMat );
 		scene.add( sky );
 
+		function buildAxes( length ) {
+			var axes = new THREE.Object3D();
+
+			axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( length, 0, 0 ), 0xFF0000, false ) ); // +X
+			axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -length, 0, 0 ), 0xFF0000, true) ); // -X
+			axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, length, 0 ), 0x00FF00, false ) ); // +Y
+			axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, -length, 0 ), 0x00FF00, true ) ); // -Y
+			axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, length ), 0x0000FF, false ) ); // +Z
+			axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -length ), 0x0000FF, true ) ); // -Z
+
+			return axes;
+
+		}
+
+		function buildAxis( src, dst, colorHex, dashed ) {
+			var geom = new THREE.Geometry(),
+					mat;
+
+			if(dashed) {
+				mat = new THREE.LineDashedMaterial({ linewidth: 3, color: colorHex, dashSize: 3, gapSize: 3 });
+			} else {
+				mat = new THREE.LineBasicMaterial({ linewidth: 3, color: colorHex });
+			}
+
+			geom.vertices.push( src.clone() );
+			geom.vertices.push( dst.clone() );
+			geom.computeLineDistances(); // This one is SUPER important, otherwise dashed lines will appear as simple plain lines
+
+			return new THREE.Line(geom, mat, THREE.LinePieces);
+
+		}
+
+		scene.add(buildAxes(1000));
+
 		// Loader
 		loader = new THREE.TextureLoader();
 
@@ -238,7 +272,7 @@
 		requestAnimationFrame( render );
 		renderer.autoClear = false;
 		renderer.clear();
-		renderer.render(backgroundScene , backgroundCamera );
+		//renderer.render(backgroundScene , backgroundCamera );
 		renderer.render( scene, camera );
 		render_stats.update();
 	};
@@ -251,12 +285,13 @@
 			var i, j, rows = 16,
 				block;
 			InventoryBuilder.buildWorld({
-				scene:scene
+				scene:scene,
+				vms: vms
 			});
 			var server = new Server({name:"test"});
 			server.position.y = 3;
 			server.position.x = 3;
-			//blocks.push(server);
+			//vms.push(server);
 			//scene.add( server );
 			for ( i = 0; i < rows; i++ ) {
 				for ( j = 0; j < 3; j++ ) {
@@ -271,11 +306,12 @@
 					block.receiveShadow = true;
 					block.castShadow = true;
 					//scene.add( block );
-					blocks.push( block );
+					vms.push( block );
 				}
 			}
 		}
 	})();
+
 
 	initEventHandling = (function() {
 		var _vector = new THREE.Vector3,
@@ -293,7 +329,7 @@
 			_vector.unproject( camera );
 
 			ray = new THREE.Raycaster( camera.position, _vector.sub( camera.position ).normalize() );
-			intersections = ray.intersectObjects( blocks );
+			intersections = ray.intersectObjects( vms );
 
 			if ( intersections.length > 0 ) {
 				selected_block = intersections[0].object;
@@ -399,8 +435,6 @@
 			$("ul").delegate( "li", "click", function() {
 				var vmName = $(this).text();
 				var vm = new VM({name: vmName});
-				vm.receiveShadow = true;
-				vm.castShadow = true;
 				var position = getAvailableVmPosition();
 				vm.position.y = position[0];
 				vm.position.x = position[1];

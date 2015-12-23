@@ -4,6 +4,6 @@ function BaseEntity(config){
     this.name = config.name;
     this.receiveShadow = true;
     this.castShadow = true;
-    Physijs.BoxMesh.call(this, config.geometry, config.material);
+    Physijs.BoxMesh.call(this, config.geometry, config.material, config.mass);
 }
 BaseEntity.prototype = Object.create(Physijs.BoxMesh.prototype);
