@@ -60,7 +60,7 @@
 	Physijs.scripts.ammo = 'examples/js/ammo.js';
 	var shouldZoom = true;
 	var initScene, initEventHandling, render, craeateInventory, loader,
-		renderer, render_stats, physics_stats, scene,backgroundScene, backgroundCamera, dir_light, am_light, camera,
+		renderer, render_stats, physics_stats, scene, controls,backgroundScene, backgroundCamera, dir_light, am_light, camera,
 		table, vms = [], table_material, block_material, intersect_plane,
 		selected_block = null, mouse_position = new THREE.Vector3, block_offset = new THREE.Vector3, _i, _v3 = new THREE.Vector3;
 
@@ -346,7 +346,9 @@
 				selected_block.setAngularVelocity( _vector );
 				selected_block.setLinearFactor( _vector );
 				selected_block.setLinearVelocity( _vector );
-
+				//selected_block._physijs.mass = 50;
+				controls.enableRotate = false;
+				//selected_block.setMass(30);
 				mouse_position.copy( intersections[0].point );
 				block_offset.subVectors( selected_block.position, mouse_position );
 
@@ -376,7 +378,7 @@
 		};
 
 		handleMouseUp = function( evt ) {
-
+			controls.enableRotate = true;
 			if ( selected_block !== null ) {
 				_vector.set( 1, 1, 1 );
 				selected_block.setAngularFactor( _vector );
