@@ -140,7 +140,7 @@
 		);
 		camera.position.set( 180, 180, 180 );
 		camera.lookAt(new THREE.Vector3( 0, 7, 0 ));
-		var controls = new THREE.OrbitControls( camera, renderer.domElement );
+		controls = new THREE.OrbitControls( camera, renderer.domElement );
 		controls.target.set( 0, 0, 0 ); // view direction perpendicular to XY-plane
 		controls.enableRotate = true;
 		controls.enableZoom = true; // optional
