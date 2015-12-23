@@ -59,7 +59,7 @@
 	Physijs.scripts.worker = '../physijs_worker.js';
 	Physijs.scripts.ammo = 'examples/js/ammo.js';
 
-	var initScene, initEventHandling, render, createTower, loader,
+	var initScene, initEventHandling, render, craeateInventory, loader,
 		renderer, render_stats, physics_stats, scene,backgroundScene, backgroundCamera, dir_light, am_light, camera,
 		table, vms = [], table_material, block_material, intersect_plane,
 		selected_block = null, mouse_position = new THREE.Vector3, block_offset = new THREE.Vector3, _i, _v3 = new THREE.Vector3;
@@ -254,7 +254,7 @@
 		table.receiveShadow = true;
 		scene.add( table );
 
-		createTower();
+		craeateInventory();
 
 		intersect_plane = new THREE.Mesh(
 			new THREE.PlaneGeometry( 150, 150 ),
@@ -262,6 +262,8 @@
 		);
 		intersect_plane.rotation.x = Math.PI / -2;
 		scene.add( intersect_plane );
+		scene.fog = new THREE.FogExp2( 0x99ccff, 0.007 );
+		renderer.setClearColor( scene.fog.color, 1 );
 
 		initEventHandling();
 
@@ -278,7 +280,7 @@
 		render_stats.update();
 	};
 
-	createTower = (function() {
+	craeateInventory = (function() {
 		var block_height = 1, block_offset = 2;
 		return function() {
 			var i, j, rows = 16,

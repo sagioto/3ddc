@@ -9,23 +9,27 @@ var inventory = {
       "servers" : [
         {
           "name" : "Server11",
-          "status" : "online",
+          "status" : "offline",
           "vms" : [
             {
               "name" : "vm111",
-              "status" : "online"
+              "status" : "offline"
             },
             {
               "name" : "vm112",
-              "status" : "online"
+              "status" : "offline"
             },
             {
               "name" : "vm113",
-              "status" : "online"
+              "status" : "offline"
             },
             {
               "name" : "vm114",
-              "status" : "online"
+              "status" : "offline"
+            },
+            {
+              "name" : "vm114",
+              "status" : "offline"
             }
           ]
         },
@@ -35,7 +39,7 @@ var inventory = {
           "vms" : [
             {
               "name" : "vm121",
-              "status" : "online"
+              "status" : "offline"
             },
             {
               "name" : "vm122",
@@ -57,11 +61,27 @@ var inventory = {
           "vms" : [
             {
               "name" : "vm131",
-              "status" : "online"
+              "status" : "offline"
             },
             {
               "name" : "vm132",
+              "status" : "offline"
+            },
+            {
+              "name" : "vm133",
               "status" : "online"
+            },
+            {
+              "name" : "vm134",
+              "status" : "online"
+            },
+            {
+              "name" : "vm131",
+              "status" : "offline"
+            },
+            {
+              "name" : "vm132",
+              "status" : "offline"
             },
             {
               "name" : "vm133",

@@ -1,17 +1,28 @@
 function VM(config){
     var geometry = new THREE.BoxGeometry( VM.prototype.width, VM.prototype.height, VM.prototype.depth );
+
+    var x = document.createElement("canvas");
+    var xc = x.getContext("2d");
+    x.width = x.height = 128;
+    xc.shadowColor = "#000";
+    xc.fillStyle = config.status == 'online' ? 'green' : 'red';
+    xc.fillRect(0, 0, 128, 128);
+    xc.fillStyle = "black";
+    xc.font = "30pt arial bold";
+    xc.fillText(config.name, 10, 64);
+    var xm = new THREE.MeshLambertMaterial({ map: new THREE.Texture(x), transparent: false });
+    xm.map.needsUpdate = true;
+
     var material =  Physijs.createMaterial(
-        new THREE.MeshLambertMaterial({ map: loader.load( 'images/vm.jpg' )}),
-        1, // medium friction
+        xm,
+        .9, // medium friction
         .9 // medium restitution
     );
-    material.map.wrapS = material.map.wrapT = THREE.RepeatWrapping;
-    material.map.repeat.set( 1, .5 );
-
 
     config.geometry = geometry;
     config.material = material;
     config.mass = 200;
+    config.doubleSided = true;
 
     BaseEntity.call(this, config);
 }
