@@ -3,6 +3,10 @@
     "datacenters" : [
       {
         "name" : "DC1",
+        "coordinates": {
+          "latitude": 32.085300,
+          "longitude": 34.781768
+        },
         "servers" : [
           {
             "name" : "Server11",
@@ -74,6 +78,10 @@
       },
       {
         "name" : "DC2",
+        "coordinates": {
+          "latitude": 42.697708,
+          "longitude": 23.321868
+        },
         "servers" : [
           {
             "name" : "Server21",
@@ -145,6 +153,10 @@
       },
       {
         "name" : "DC3",
+        "coordinates": {
+          "latitude": 37.441883,
+          "longitude": -122.143019
+        },
         "servers" : [
           {
             "name" : "Server31",
@@ -216,6 +228,10 @@
       },
       {
         "name" : "DC4",
+        "coordinates": {
+          "latitude": 12.971599,
+          "longitude": 77.594563
+        },
         "servers" : [
           {
             "name" : "Server41",
