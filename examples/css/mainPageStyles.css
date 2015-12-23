@@ -1,0 +1,45 @@
+/**********************   Main page ********************** */
+
+body  {
+    background: black;
+    background-image: url("../images/3dAwakens.png");
+    background-size:cover;
+    font-family: Verdana;
+    font-size: 10pt;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+#dataCenters li {
+    float: left;
+}
+
+#dataCenters li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#dataCenters li a:hover {
+    background-color: #111;
+    color: yellow;
+}
+
+ul li.disabled, ul li.disabled:hover{
+    color:grey;
+}
+
+
+
+
