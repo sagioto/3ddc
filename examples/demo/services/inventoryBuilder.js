@@ -12,12 +12,12 @@ InventoryBuilder.buildWorld = function(config){
     dc.servers.forEach(function(server, index){
         var currServer = new Server({name: server.name, status: server.status});
         currServer.position.x = startX + (index * Server.prototype.width * 2);
-        currServer.position.y = 2;
+        currServer.position.y = 1;
         scene.add(currServer);
         var edges = new THREE.EdgesHelper( currServer, 0x000000 );
         scene.add( edges );
         var vmStartX = currServer.position.x;
-        var vmStartY = Server.prototype.height;
+        var vmStartY = Server.prototype.height - 1;
         var vmStartZ = currServer.position.z;
         server.vms.forEach(function(vm,index){
             var currVm = new VM({name: vm.name, status: vm.status});
