@@ -8,7 +8,7 @@ InventoryBuilder.buildWorld = function(config){
     var dc = inventory.datacenters[0];
     var numOfServers = dc.servers.length;
     var totalWidth = (numOfServers * 2 - 1) *( Server.prototype.width);
-    var startX = (totalWidth / -2) + Server.prototype.width;
+    var startX = (totalWidth / -2) + Server.prototype.width / 2;
     dc.servers.forEach(function(server, index){
         var currServer = new Server({name: server.name, status: server.status});
         currServer.position.x = startX + (index * Server.prototype.width * 2);
