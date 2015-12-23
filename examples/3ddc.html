@@ -421,6 +421,10 @@
 		<button id="cancelAddVmButton">Cancel</button>
 	</div>
 
+	<div id="EntityDetails"  class='EntityDetails' style="display: none; position:fixed; right: 200px; top: 100px">
+		yghiu
+	</div>
+
 	<script type="text/javascript">
 		$(function () {
 
@@ -434,9 +438,9 @@
 				var vmName = $(this).text();
 				var vm = new VM({name: vmName});
 				var position = getAvailableVmPosition();
-				vm.position.x = position[0];
-				vm.position.y = position[1];
-				vm.position.z = position[2];
+				vm.position.x = 0;
+				vm.position.y = 30;
+				vm.position.z = 0;
 				scene.add(vm);
 			});
 
@@ -453,6 +457,9 @@
 				$("#addVmForm").hide();
 				clicked = false;
 				$("#vmList li").slideUp(3500);
+				var vmName = $(this).text();
+				addVmToWorld(vmName);
+
 
 			});
 			$("#cancelAddVmButton").click(function () {
@@ -475,6 +482,15 @@
 				var x = Math.floor(Math.random() * 50) - 25;
 				var z = Math.floor(Math.random() * 50) - 25;
 				return [x,1,z];
+			}
+			function addVmToWorld(vmName){
+				var vm = new VM({name: vmName});
+				var position = getAvailableVmPosition();
+				vm.position.x = 0;
+				vm.position.y = 5;
+				vm.position.z = 20;
+				scene.add(vm);
+				vms.push(vm);
 			}
 
 		});

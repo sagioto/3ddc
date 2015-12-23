@@ -5,7 +5,7 @@ function VM(config){
     var xc = x.getContext("2d");
     x.width = x.height = 128;
     xc.shadowColor = "#000";
-    xc.fillStyle = config.status == 'online' ? 'green' : 'red';
+    xc.fillStyle = config.status == 'online' ? '#6BB445' : 'red';
     xc.fillRect(0, 0, 128, 128);
     xc.fillStyle = "black";
     xc.font = "30pt arial bold";

@@ -41,7 +41,12 @@ ul {
 ul li.disabled, ul li.disabled:hover{
     color:grey;
 }
-
+.entityDetails{
+    display: none;
+    position:fixed;
+    right: 200px;
+    top: 100px
+}
 
 
 
