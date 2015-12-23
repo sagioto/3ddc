@@ -71,6 +71,7 @@
 		renderer.shadowMapSoft = true;
 		renderer.setClearColor('#99ccff');
 
+
 		document.getElementById( 'viewport' ).appendChild( renderer.domElement );
 		/**
 
@@ -398,8 +399,8 @@
 <body>
 	<div id="viewport"></div>
 
-	<div id="addVm">
-		<p class="addVm">Add a VM</p>
+	<div id="addVmDiv">
+		<p>Add a VM</p>
 		<input type="button" name="addVm" value="+" class="addVm">
 
 		<ul id="vmList">
@@ -439,7 +440,7 @@
 				scene.add(vm);
 			});
 
-			$("#addVm input").click(function () {
+			$("#addVmDiv input").click(function () {
 				clicked = true;
 				$("#vmList li").show();
 				$("#addVmForm").show();
@@ -451,18 +452,20 @@
 				$("#vmList").append('<li>' + vmName + '</li>');
 				$("#addVmForm").hide();
 				clicked = false;
-				$("#vmList li").hide(800);
+				$("#vmList li").slideUp(3500);
 
 			});
 			$("#cancelAddVmButton").click(function () {
+				clicked = false;
 				$("#addVmForm").hide();
+				$("#vmList li").slideUp(1500);
 			});
 
-			$("#addVm").hover(function () {
+			$("#addVmDiv").hover(function () {
 				$("#vmList li").show(800);
 			}).mouseleave(function (){
 				if (!clicked){
-					$("#vmList li").hide();
+					$("#vmList li").slideUp(1500);
 				}
 			});
 
