@@ -21,7 +21,7 @@ function VM(config){
 
     config.geometry = geometry;
     config.material = material;
-    config.mass = 200;
+    config.mass = 0;
     config.doubleSided = true;
 
     BaseEntity.call(this, config);
