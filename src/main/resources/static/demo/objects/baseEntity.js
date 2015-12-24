@@ -74,6 +74,9 @@ BaseEntity.prototype.onCollision = function(other_object, relative_velocity, rel
     if(this.isBeingDragged && this.isNew && other_object.server){
         this.isNew = false;
         $.notify(this.entityName+" was created on " +other_object.server.entityName);
+    }
+    if(this.isBeingDragged && !this.isNew && this.server && other_object.server && (this.server != other_object.server)){
+        $.notify("vMotion: "+this.entityName+" was moved to " +other_object.server.entityName);
         //alert("new VM");
     }
 }
