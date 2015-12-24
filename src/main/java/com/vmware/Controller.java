@@ -30,7 +30,7 @@ public class Controller {
         return success.toString();
     }
 
-    @RequestMapping(value = "/{entity}/Names")
+    @RequestMapping(value = "/{entity}/names")
     public String getProperties(@PathVariable String entity) throws InvalidStateFaultMsg, InsufficientResourcesFaultFaultMsg, TaskInProgressFaultMsg, DuplicateNameFaultMsg, ConcurrentAccessFaultMsg, InvalidNameFaultMsg, FileFaultFaultMsg, InvalidCollectorVersionFaultMsg, InvalidPropertyFaultMsg, InvalidDatastoreFaultMsg, VmConfigFaultFaultMsg, RuntimeFaultFaultMsg {
         List<String> results = vcCollector.collectNames(entity);
         for (String result : results) {

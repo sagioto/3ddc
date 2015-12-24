@@ -3,6 +3,7 @@ package com.vmware;
 import com.vmware.connection.Connection;
 import com.vmware.vim25.*;
 import com.vmware.vm.VMotion;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class VMotioner extends VMotion {
 
+    @Autowired
     public VMotioner(Connection vcConnection) {
         super();
         setConnection(vcConnection);
