@@ -272,6 +272,12 @@
 				shouldZoom = false;
 			}
 		}
+		vms.forEach(function(vm, index){
+			if(vm.position.y<0){
+				$.notify(vm.entityName+ " was deleted");
+				vms.splice(index);
+			}
+		})
 		requestAnimationFrame( render );
 		renderer.autoClear = false;
 		renderer.clear();
