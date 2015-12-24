@@ -62,7 +62,6 @@ body {
 
 #addVmDiv img {
 	float: left;
-	margin-top: 7px;
 	margin-right: 10px;
 }
 
@@ -74,7 +73,7 @@ body {
 	position: absolute;
 	top: 180px;
 	left: 50px;
-	padding: 10px;
+	padding: 20px;
 	color: white;
 	text-align: left;
 	box-shadow: 5px 5px 5px black;
