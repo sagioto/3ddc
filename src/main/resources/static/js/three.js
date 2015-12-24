@@ -310,7 +310,7 @@ THREE.LoopPingPong = 2202;
 
 THREE.Projector = function () {
 
-	console.error( 'THREE.Projector has been moved to /examples/js/renderers/Projector.js.' );
+	console.error( 'THREE.Projector has been moved to /js/renderers/Projector.js.' );
 
 	this.projectVector = function ( vector, camera ) {
 
@@ -336,7 +336,7 @@ THREE.Projector = function () {
 
 THREE.CanvasRenderer = function () {
 
-	console.error( 'THREE.CanvasRenderer has been moved to /examples/js/renderers/CanvasRenderer.js' );
+	console.error( 'THREE.CanvasRenderer has been moved to /js/renderers/CanvasRenderer.js' );
 
 	this.domElement = document.createElement( 'canvas' );
 	this.clear = function () {};
@@ -6897,7 +6897,7 @@ THREE.Math = {
 
 /**
  * Spline from Tween.js, slightly optimized (and trashed)
- * http://sole.github.com/tween.js/examples/05_spline.html
+ * http://sole.github.com/tween.js/05_spline.html
  *
  * @author mrdoob / http://mrdoob.com/
  * @author alteredq / http://alteredqualia.com/
