@@ -1,0 +1,4 @@
+vcenter:
+  url: https://tlv-itbms-vc/sdk/vimService
+  user: root
+  password: vmware
