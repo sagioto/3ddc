@@ -21,7 +21,6 @@ public class Controller {
     @Autowired
     private VMotioner vMotioner;
 
-
     @RequestMapping(value = "/createVM", method = RequestMethod.POST)
     public String createVM(@RequestParam("datacenterName") String dataCenterName,
                            @RequestParam("vmName") String vmName,

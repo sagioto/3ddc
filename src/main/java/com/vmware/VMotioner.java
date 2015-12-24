@@ -23,6 +23,7 @@ public class VMotioner extends VMotion {
         setTargetHost(targetHost);
         setTargetDS(targetDS);
         setSourceHost(sourceHost);
+        connect();
         run();
         return "success";
     }
