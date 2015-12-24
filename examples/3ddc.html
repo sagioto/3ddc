@@ -388,21 +388,21 @@
 
 
 	<div id="addVmDiv">
-		<p>Add a VM</p>
-		<input type="button" name="addVm" value="+" class="addVm">
-
-		<ul id="vmList">
+		<img src="images/vmIconSmall.png">
+		<span>
+			<p>Add a VM &nbsp&nbsp</p>
+			<input type="button" name="addVm" value="+" class="addVm">
+		</span>
+		<!--<ul id="vmList">
 			<li>template vm1</li>
 			<li>template vm2</li>
 			<li>template vm3</li>
-		</ul>
+		</ul>-->
 	</div>
 	<div id="addVmForm">
 		<h3>Create a VM template</h3>
-
-
-					<input class="input-medium" type="text" id="inputEmail"  placeholder="VM name">
-					<input class="input-medium" type="text"id="inputPassword" placeholder="CPU">
+					<input class="input-medium" type="text" id="inputName" placeholder="VM name">
+					<input class="input-medium" type="text" id="inputPassword" placeholder="CPU">
 					<input class="input-medium" type="text" id="inputVMMemory" placeholder="Memory">
 
 
@@ -416,61 +416,31 @@
 
 	<div id="entityDetails"  class='entityDetails'>
 		<dl class="dl-horizontal">
-			<dt>asd</dt><dd>asd</dd>
-			<dt>asd</dt><dd>asd</dd>
-			<dt></dt><dd></dd>
+			<!--<dt>asd</dt><dd>asd</dd>-->
+			<!--<dt>asd</dt><dd>asd</dd>-->
+			<!--<dt></dt><dd></dd>-->
 		</dl>
 	</div>
 
 	<script type="text/javascript">
 		$(function () {
 
-			$("body").animate({scrollBottom: 200},1000);
-
-			var clicked = false;
-			$("#vmList li").hide();
 			$("#addVmForm").hide();
 
-			$("ul").delegate( "li", "click", function() {
-				var vmName = $(this).text();
-				var vm = new VM({name: vmName});
-				var position = getAvailableVmPosition();
-				vm.position.x = 0;
-				vm.position.y = 30;
-				vm.position.z = 0;
-				scene.add(vm);
-			});
-
 			$("#addVmDiv input").click(function () {
-				clicked = true;
-				$("#vmList li").show();
-				$("#addVmForm").show();
+				$("#addVmForm").slideDown(1500);
 			});
 
 			$("#addVmButton").click(function () {
 				$("#addVmForm").show();
-				var vmName = $('input[name="vmName"]').val();
-				$("#vmList").append('<li>' + vmName + '</li>');
-				$("#addVmForm").hide();
-				clicked = false;
-				$("#vmList li").slideUp(3500);
-				var vmName = $(this).text();
+				var vmName = $("#inputName").val();
 				addVmToWorld(vmName);
-
+				$("#addVmForm").slideUp(1500);
 
 			});
+
 			$("#cancelAddVmButton").click(function () {
-				clicked = false;
-				$("#addVmForm").hide();
-				$("#vmList li").slideUp(1500);
-			});
-
-			$("#addVmDiv").hover(function () {
-				$("#vmList li").show(800);
-			}).mouseleave(function (){
-				if (!clicked){
-					$("#vmList li").slideUp(1500);
-				}
+				$("#addVmForm").slideUp(1500);
 			});
 
 			var getAvailableVmPosition = function(){

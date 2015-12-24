@@ -1,6 +1,5 @@
 $(function () {
 
-
     //AJAX to server to get all Data Center names
     $.ajax({
         type: "GET",
@@ -9,12 +8,4 @@ $(function () {
         //append each data center to navigation list
     });
 
-
-
-
-
-
-
-
-
-};
+});

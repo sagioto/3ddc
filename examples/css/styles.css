@@ -60,13 +60,20 @@ body {
 	overflow: auto;
 }
 
+#addVmDiv img {
+	float: left;
+	margin-top: 7px;
+	margin-right: 10px;
+}
+
+
 #addVmForm{
 	width: 300px;
 	height: 200px;
 	background: rgba(0,0,0,0.5);
 	position: absolute;
 	top: 180px;
-	left: 300px;
+	left: 50px;
 	padding: 10px;
 	color: white;
 	text-align: left;
