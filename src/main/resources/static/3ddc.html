@@ -11,7 +11,7 @@
 
 	<script type="text/javascript" src="js/three.js"></script>
 	<script type="text/javascript" src="js/stats.js"></script>
-	<script type="text/javascript" src="../physi.js"></script>
+	<script type="text/javascript" src="physi.js"></script>
 	<script type="text/javascript" src="js/orbitControl.js"></script>
 	<script type="text/javascript" src="js/geometries/TextGeomerty.js"></script>
 	<script type="text/javascript" src="js/utils/FontUtils.js"></script>
@@ -22,6 +22,8 @@
 	<script type="text/javascript" src="demo/objects/baseEntity.js"></script>
 	<script type="text/javascript" src="demo/objects/server.js"></script>
 	<script type="text/javascript" src="demo/objects/vm.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="demo/services/inventoryBuilder.js"></script>
 	<script type="text/javascript" src="js/notify.js"></script>
 
@@ -299,7 +301,29 @@
 
 	initEventHandling = (function() {
 		var _vector = new THREE.Vector3,
-			handleMouseDown, handleMouseMove, handleMouseUp;
+			handleMouseDown, handleMouseMove, handleMouseUp, handleMouseDoubleClick;
+
+		handleMouseDoubleClick = function( evt ){
+			var ray, intersections;
+
+			_vector.set(
+					( evt.clientX / window.innerWidth ) * 2 - 1,
+					-( evt.clientY / window.innerHeight ) * 2 + 1,
+					1
+			);
+
+			_vector.unproject( camera );
+
+			ray = new THREE.Raycaster( camera.position, _vector.sub( camera.position ).normalize() );
+			intersections = ray.intersectObjects( vms );
+
+			if ( intersections.length > 0 ) {
+				selected_block = intersections[0].object;
+				$( "#dialog" ).dialog();
+				$( "#dialog" ).fadeIn();
+				//window.open('https://tlv-itbms-vc:9443/vsphere-client/webconsole.html?vmId=vm-2810&vmName=Elad-ITBM-3&serverGuid=3EC7D8DC-9A80-4FF4-976F-7757BD8ACD31&host=tlv-itbms-vc.eng.vmware.com:443&sessionTicket=cst-VCT-52875ee9-3949-b474-794c-f2abb8c924b4--tp-D1-3E-EE-20-EB-B8-E4-35-7B-20-57-AA-0C-FF-19-07-D4-08-46-B2&thumbprint=D1:3E:EE:20:EB:B8:E4:35:7B:20:57:AA:0C:FF:19:07:D4:08:46:B2', '_blank');
+			}
+		};
 
 		handleMouseDown = function( evt ) {
 			var ray, intersections;
@@ -372,6 +396,7 @@
 			renderer.domElement.addEventListener( 'mousedown', handleMouseDown );
 			renderer.domElement.addEventListener( 'mousemove', handleMouseMove );
 			renderer.domElement.addEventListener( 'mouseup', handleMouseUp );
+			renderer.domElement.addEventListener( 'dblclick', handleMouseDoubleClick );
 		};
 	})();
 
@@ -457,7 +482,7 @@
 				var x = Math.floor(Math.random() * 50) - 25;
 				var z = Math.floor(Math.random() * 50) - 25;
 				return [x,1,z];
-			}
+			};
 			function addVmToWorld(vmName){
 				var vm = new VM({name: vmName, isNew: true, dcName: window.dcName});
 				var position = getAvailableVmPosition();
@@ -470,7 +495,9 @@
 
 		});
 	</script>
-
+<div id="dialog" style="display:none;">
+	<iframe style="width:800px;height:600px " src="https://tlv-itbms-vc:9443/vsphere-client/webconsole.html?vmId=vm-2810&vmName=Elad-ITBM-3&serverGuid=3EC7D8DC-9A80-4FF4-976F-7757BD8ACD31&host=tlv-itbms-vc.eng.vmware.com:443&sessionTicket=cst-VCT-52875ee9-3949-b474-794c-f2abb8c924b4--tp-D1-3E-EE-20-EB-B8-E4-35-7B-20-57-AA-0C-FF-19-07-D4-08-46-B2&thumbprint=D1:3E:EE:20:EB:B8:E4:35:7B:20:57:AA:0C:FF:19:07:D4:08:46:B2"></iframe>
+</div>
 </body>
 
 </html>
