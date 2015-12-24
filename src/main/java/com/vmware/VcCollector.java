@@ -4,6 +4,7 @@ import com.vmware.general.PropertyCollector;
 import com.vmware.vim25.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +32,14 @@ public class VcCollector extends PropertyCollector {
         setNoofTasks(String.valueOf(3));
     }
 
-    public List<String> collect() {
+    public List<String> collectNames(String entity) {
+        switch (entity) {
+            case "dc":
+                activeType = DCS;
+                break;
+            default:
+                activeType = VMS;
+        }
         try {
             connect();
             main();
@@ -40,16 +48,6 @@ public class VcCollector extends PropertyCollector {
             e.printStackTrace();
             return Collections.emptyList();
         }
-    }
-
-    public List<String> collectDCs() {
-        activeType = DCS;
-        return collect();
-    }
-
-    public List<String> collectVMs() {
-        activeType = VMS;
-        return collect();
     }
 
     @Override

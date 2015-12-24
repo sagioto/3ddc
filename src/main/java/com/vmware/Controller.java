@@ -2,10 +2,7 @@ package com.vmware;
 
 import com.vmware.vim25.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +18,9 @@ public class Controller {
     @Autowired
     private VcCollector vcCollector;
 
+    @Autowired
+    private VMotioner vMotioner;
+
 
     @RequestMapping(value = "/createVM", method = RequestMethod.POST)
     public String createVM(@RequestParam("datacenterName") String dataCenterName,
@@ -30,13 +30,22 @@ public class Controller {
         return success.toString();
     }
 
-    @RequestMapping(value = "/datacentersNames")
-    public String getProperties() throws InvalidStateFaultMsg, InsufficientResourcesFaultFaultMsg, TaskInProgressFaultMsg, DuplicateNameFaultMsg, ConcurrentAccessFaultMsg, InvalidNameFaultMsg, FileFaultFaultMsg, InvalidCollectorVersionFaultMsg, InvalidPropertyFaultMsg, InvalidDatastoreFaultMsg, VmConfigFaultFaultMsg, RuntimeFaultFaultMsg {
-        List<String> results = vcCollector.collectDCs();
+    @RequestMapping(value = "/{entity}/Names")
+    public String getProperties(@PathVariable String entity) throws InvalidStateFaultMsg, InsufficientResourcesFaultFaultMsg, TaskInProgressFaultMsg, DuplicateNameFaultMsg, ConcurrentAccessFaultMsg, InvalidNameFaultMsg, FileFaultFaultMsg, InvalidCollectorVersionFaultMsg, InvalidPropertyFaultMsg, InvalidDatastoreFaultMsg, VmConfigFaultFaultMsg, RuntimeFaultFaultMsg {
+        List<String> results = vcCollector.collectNames(entity);
         for (String result : results) {
             System.out.println(result);
         }
         return "success";
+    }
+
+    @RequestMapping(value = "/vmotion")
+    public String moveVm(@RequestParam("targetHost") String targetHost,
+                         @RequestParam("sourceHost") String sourceHost,
+                         @RequestParam("vmName") String vmName
+                         ) throws InvalidStateFaultMsg, InsufficientResourcesFaultFaultMsg, TaskInProgressFaultMsg, DuplicateNameFaultMsg, ConcurrentAccessFaultMsg, InvalidNameFaultMsg, FileFaultFaultMsg, InvalidCollectorVersionFaultMsg, InvalidPropertyFaultMsg, InvalidDatastoreFaultMsg, VmConfigFaultFaultMsg, RuntimeFaultFaultMsg, TimedoutFaultMsg, MigrationFaultFaultMsg {
+        return vMotioner.moveVM(vmName,targetHost, "somtr", sourceHost);
+
     }
 
 
