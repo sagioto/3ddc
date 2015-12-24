@@ -38,12 +38,12 @@ public class Controller {
         return "success";
     }
 
-    @RequestMapping(value = "/vmotion")
+    @RequestMapping(value = "/vmotion", method = RequestMethod.PUT)
     public String moveVm(@RequestParam("targetHost") String targetHost,
                          @RequestParam("sourceHost") String sourceHost,
                          @RequestParam("vmName") String vmName
                          ) throws InvalidStateFaultMsg, InsufficientResourcesFaultFaultMsg, TaskInProgressFaultMsg, DuplicateNameFaultMsg, ConcurrentAccessFaultMsg, InvalidNameFaultMsg, FileFaultFaultMsg, InvalidCollectorVersionFaultMsg, InvalidPropertyFaultMsg, InvalidDatastoreFaultMsg, VmConfigFaultFaultMsg, RuntimeFaultFaultMsg, TimedoutFaultMsg, MigrationFaultFaultMsg {
-        return vMotioner.moveVM(vmName,targetHost, "somtr", sourceHost);
+        return vMotioner.moveVM(vmName,targetHost, "VNX-ITBM-LUN-18", sourceHost, "");
 
     }
 

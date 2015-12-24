@@ -73,13 +73,12 @@ BaseEntity.prototype.onCollision = function(other_object, relative_velocity, rel
     }
     if(this.isBeingDragged && this.isNew && other_object.server){
         this.isNew = false;
-        /*$.ajax({
+        $.ajax({
             type: "POST",
-            url: '',
-            data: 'json'
+            url: '/createVM?datacenterName=TLV&hostName=10.29.67.10&vmName=' + this.entityName
             //success: success,
             //dataType: dataType
-        });*/
+        });
         $.notify(this.entityName+" was created on " +other_object.server.entityName);
 
     }

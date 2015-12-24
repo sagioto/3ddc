@@ -18,11 +18,12 @@ public class VMotioner extends VMotion {
         setConnection(vcConnection);
     }
 
-    public String moveVM(String vmName, String targetHost, String targetDS, String sourceHost) throws InsufficientResourcesFaultFaultMsg, MigrationFaultFaultMsg, InvalidStateFaultMsg, TimedoutFaultMsg, FileFaultFaultMsg, InvalidCollectorVersionFaultMsg, InvalidPropertyFaultMsg, InvalidDatastoreFaultMsg, VmConfigFaultFaultMsg, RuntimeFaultFaultMsg {
+    public String moveVM(String vmName, String targetHost, String targetDS, String sourceHost,String targetPool) throws InsufficientResourcesFaultFaultMsg, MigrationFaultFaultMsg, InvalidStateFaultMsg, TimedoutFaultMsg, FileFaultFaultMsg, InvalidCollectorVersionFaultMsg, InvalidPropertyFaultMsg, InvalidDatastoreFaultMsg, VmConfigFaultFaultMsg, RuntimeFaultFaultMsg {
         setVmName(vmName);
         setTargetHost(targetHost);
         setTargetDS(targetDS);
         setSourceHost(sourceHost);
+        setTargetPool(targetPool);
         connect();
         run();
         return "success";
