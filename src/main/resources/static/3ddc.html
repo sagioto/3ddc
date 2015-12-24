@@ -22,7 +22,6 @@
 	<script type="text/javascript" src="demo/objects/baseEntity.js"></script>
 	<script type="text/javascript" src="demo/objects/server.js"></script>
 	<script type="text/javascript" src="demo/objects/vm.js"></script>
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="demo/services/inventoryBuilder.js"></script>
 	<script type="text/javascript" src="js/notify.js"></script>
@@ -277,7 +276,7 @@
 		vms.forEach(function(vm, index){
 			if(vm.position.y<0){
 				$.notify(vm.entityName+ " was deleted");
-				vms.splice(index,1);
+				vms.splice(index);
 			}
 		})
 		requestAnimationFrame( render );
