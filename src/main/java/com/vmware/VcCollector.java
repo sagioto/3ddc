@@ -16,7 +16,7 @@ import java.util.List;
 public class VcCollector extends PropertyCollector {
 
     private final String VMS = "VirtualMachine";
-    private final String DCS = "DataCenter";
+    private final String DCS = "Datacenter";
     private List<String> resultSet;
 
     private String activeType;

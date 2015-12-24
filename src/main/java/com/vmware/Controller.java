@@ -30,9 +30,9 @@ public class Controller {
         return success.toString();
     }
 
-    @RequestMapping(value = "/collect")
+    @RequestMapping(value = "/datacentersNames")
     public String getProperties() throws InvalidStateFaultMsg, InsufficientResourcesFaultFaultMsg, TaskInProgressFaultMsg, DuplicateNameFaultMsg, ConcurrentAccessFaultMsg, InvalidNameFaultMsg, FileFaultFaultMsg, InvalidCollectorVersionFaultMsg, InvalidPropertyFaultMsg, InvalidDatastoreFaultMsg, VmConfigFaultFaultMsg, RuntimeFaultFaultMsg {
-        List<String> results = vcCollector.collectVMs();
+        List<String> results = vcCollector.collectDCs();
         for (String result : results) {
             System.out.println(result);
         }
