@@ -8,6 +8,8 @@ InventoryBuilder.buildWorld = function(config){
     var dc = inventory.datacenters[0];
     $("#dcTitle").text(dc.name + ' Data Center').hide();
     $("#dcTitle").fadeIn(3000);
+    $("#dclogo").hide();
+    $("#dclogo").fadeIn(3000);
     var numOfServers = dc.servers.length;
     var totalWidth = (numOfServers * 2 - 1) *( Server.prototype.width);
     var startX = (totalWidth / -2) + Server.prototype.width / 2;

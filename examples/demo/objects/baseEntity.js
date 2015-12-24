@@ -57,10 +57,10 @@ BaseEntity.prototype.createText = function(config){
 BaseEntity.prototype.onCollision = function(other_object, relative_velocity, relative_rotation, contact_normal){
 
 
-    if(this.isBeingDragged && Math.abs(this.position.y-other_object.position.y)>0.05 ){
+    if(this.isBeingDragged && Math.abs(this.position.y-other_object.position.y)>0.02 ){
         other_object.freezeObject(  );
         this.resumeObjectMovement( );
-        this.position.set( this.position.x, other_object.position.y+VM.prototype.height+0.1, this.position.z );
+        this.position.set( this.position.x, other_object.position.y+VM.prototype.height+0.03, this.position.z );
         this.__dirtyPosition = true;
         this.freezeObject( );
     }
