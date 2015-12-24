@@ -12,7 +12,7 @@ function VM(config){
     config.material = material;
     config.mass = 5;
     config.doubleSided = true;
-
+    this.server = config.server;
     BaseEntity.call(this, config);
 }
 

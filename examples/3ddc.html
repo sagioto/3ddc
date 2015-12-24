@@ -15,13 +15,15 @@
 	<script type="text/javascript" src="js/orbitControl.js"></script>
 	<script type="text/javascript" src="js/geometries/TextGeomerty.js"></script>
 	<script type="text/javascript" src="js/utils/FontUtils.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+
 
 	<script type="text/javascript" src="demo/data/data.js"></script>
 	<script type="text/javascript" src="demo/objects/baseEntity.js"></script>
 	<script type="text/javascript" src="demo/objects/server.js"></script>
 	<script type="text/javascript" src="demo/objects/vm.js"></script>
-	<script src="http://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="demo/services/inventoryBuilder.js"></script>
+	<script type="text/javascript" src="js/notify.js"></script>
 
 	<script type="x-shader/x-vertex" id="vertexShader">
 
@@ -451,7 +453,7 @@
 				return [x,1,z];
 			}
 			function addVmToWorld(vmName){
-				var vm = new VM({name: vmName});
+				var vm = new VM({name: vmName, isNew: true, dcName: window.dcName});
 				var position = getAvailableVmPosition();
 				vm.position.x = 0;
 				vm.position.y = 5;

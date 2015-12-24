@@ -16,6 +16,7 @@ function Server(config){
     config.geometry = geometry;
     config.material = material;
     config.mass = 0;
+    this.vms = config.vms;
     BaseEntity.call(this, config);
 }
 
