@@ -6,9 +6,10 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	font-family: Verdana;
+	font-family: 'Roboto', sans-serif;
 	font-size: 10pt;
 	overflow: hidden;
+	line-height: inherit; !important;
 }
 
 #heading {
@@ -49,7 +50,7 @@ body {
 #addVmDiv{
 	text-shadow: 2px 2px 3px #222;
 	width: 200px;
-	height: 200px;
+	height: 400px;
 	position: absolute;
 	top: 0;
 	margin-top: 130px;
@@ -93,10 +94,7 @@ ul {
 form {
 	margin-left: 10px;
 }
-form input {
-	float: right;
-	margin-right: 40px;
-}
+
 .logo{
 	position: fixed;
 	top: 15px;
@@ -106,4 +104,13 @@ form input {
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-image: url('../images/logo.png');
+}
+
+.entityDetails{
+	position:fixed;
+	color: white;
+	right: 200px;
+	top: 100px;
+	width: 300px;
+	height: 200px;
 }

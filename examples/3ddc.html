@@ -4,8 +4,10 @@
 
 <head>
 	<title>3D - DC</title>
-
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+
 
 	<script type="text/javascript" src="js/three.js"></script>
 	<script type="text/javascript" src="js/stats.js"></script>
@@ -384,6 +386,7 @@
 		<p></p>
 	</div>
 
+
 	<div id="addVmDiv">
 		<p>Add a VM</p>
 		<input type="button" name="addVm" value="+" class="addVm">
@@ -394,24 +397,29 @@
 			<li>template vm3</li>
 		</ul>
 	</div>
-
 	<div id="addVmForm">
-		<h2>create a VM template</h2>
-		<form>
-			VM name: <input type="text" name="vmName">
-			<br><br>
-			cpu:<input type="text" name="cpu">
-			<br><br>
-			memory:<input type="text" name="memory">
-		</form>
-		<br>
-		<br>
-		<button id="addVmButton">Add</button>
-		<button id="cancelAddVmButton">Cancel</button>
-	</div>
+		<h3>Create a VM template</h3>
 
-	<div id="EntityDetails"  class='EntityDetails' ">
-		yghiu
+
+					<input class="input-medium" type="text" id="inputEmail"  placeholder="VM name">
+					<input class="input-medium" type="text"id="inputPassword" placeholder="CPU">
+					<input class="input-medium" type="text" id="inputVMMemory" placeholder="Memory">
+
+
+			<div class="control-group">
+					<button id="addVmButton" style='float: right;margin-left: 5px' class="btn">Add</button>
+					<button id="cancelAddVmButton" style='float: right' class="btn">Cancel</button>
+			</div>
+		</div>
+
+
+
+	<div id="entityDetails"  class='entityDetails'>
+		<dl class="dl-horizontal">
+			<dt>asd</dt><dd>asd</dd>
+			<dt>asd</dt><dd>asd</dd>
+			<dt></dt><dd></dd>
+		</dl>
 	</div>
 
 	<script type="text/javascript">

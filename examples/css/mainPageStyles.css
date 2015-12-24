@@ -6,7 +6,7 @@ body  {
     -moz-background-size: cover;    /* Mozilla*/
     -o-background-size: cover;      /* Opera*/
     background-size: cover;         /* Generic*/
-    font-family: Verdana;
+    font-family: 'Roboto', sans-serif;
     font-size: 10pt;
 }
 
@@ -42,10 +42,11 @@ ul li.disabled, ul li.disabled:hover{
     color:grey;
 }
 .entityDetails{
-    display: none;
     position:fixed;
     right: 200px;
     top: 100px
+    width: 300px;
+    height: 200px;
 }
 .logo{
     position:fixed;
