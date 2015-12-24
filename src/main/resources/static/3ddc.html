@@ -66,7 +66,7 @@
 	Physijs.scripts.worker = 'physijs_worker.js';
 	Physijs.scripts.ammo = 'js/ammo.js';
 	var shouldZoom = true;
-	var initScene, initEventHandling, render, createInventory, loader,
+	var initScene,consoleIsOpen, initEventHandling, render, createInventory, loader,
 		renderer, render_stats, physics_stats, scene, controls,backgroundScene, backgroundCamera, dir_light, am_light, camera,
 		table, vms = [], table_material, block_material, intersect_plane,
 		selected_block = null, mouse_position = new THREE.Vector3, block_offset = new THREE.Vector3, _i, _v3 = new THREE.Vector3;
@@ -304,7 +304,6 @@
 
 		handleMouseDoubleClick = function( evt ){
 			var ray, intersections;
-
 			_vector.set(
 					( evt.clientX / window.innerWidth ) * 2 - 1,
 					-( evt.clientY / window.innerHeight ) * 2 + 1,
@@ -318,8 +317,16 @@
 
 			if ( intersections.length > 0 ) {
 				selected_block = intersections[0].object;
-				$( "#dialog" ).dialog();
+				$( "#dialog").html('<iframe style="width:800px;height:600px " src="https://tlv-itbms-vc:9443/vsphere-client/webconsole.html?vmId=vm-2810&vmName=Elad-ITBM-3&serverGuid=3EC7D8DC-9A80-4FF4-976F-7757BD8ACD31&host=tlv-itbms-vc.eng.vmware.com:443&sessionTicket=cst-VCT-52875ee9-3949-b474-794c-f2abb8c924b4--tp-D1-3E-EE-20-EB-B8-E4-35-7B-20-57-AA-0C-FF-19-07-D4-08-46-B2&thumbprint=D1:3E:EE:20:EB:B8:E4:35:7B:20:57:AA:0C:FF:19:07:D4:08:46:B2"></iframe>');
+
+				$( "#dialog" ).dialog({
+					close: function(){
+						consoleIsOpen = false;
+					}
+				});
+
 				$( "#dialog" ).fadeIn();
+				consoleIsOpen = true;
 				//window.open('https://tlv-itbms-vc:9443/vsphere-client/webconsole.html?vmId=vm-2810&vmName=Elad-ITBM-3&serverGuid=3EC7D8DC-9A80-4FF4-976F-7757BD8ACD31&host=tlv-itbms-vc.eng.vmware.com:443&sessionTicket=cst-VCT-52875ee9-3949-b474-794c-f2abb8c924b4--tp-D1-3E-EE-20-EB-B8-E4-35-7B-20-57-AA-0C-FF-19-07-D4-08-46-B2&thumbprint=D1:3E:EE:20:EB:B8:E4:35:7B:20:57:AA:0C:FF:19:07:D4:08:46:B2', '_blank');
 			}
 		};
@@ -358,7 +365,9 @@
 		};
 
 		handleMouseMove = function( evt ) {
-
+			if(consoleIsOpen){
+				return;
+			}
 			var ray, intersection,
 				i, scalar;
 
@@ -495,7 +504,6 @@
 		});
 	</script>
 <div id="dialog" style="display:none;">
-	<iframe style="width:800px;height:600px " src="https://tlv-itbms-vc:9443/vsphere-client/webconsole.html?vmId=vm-2810&vmName=Elad-ITBM-3&serverGuid=3EC7D8DC-9A80-4FF4-976F-7757BD8ACD31&host=tlv-itbms-vc.eng.vmware.com:443&sessionTicket=cst-VCT-52875ee9-3949-b474-794c-f2abb8c924b4--tp-D1-3E-EE-20-EB-B8-E4-35-7B-20-57-AA-0C-FF-19-07-D4-08-46-B2&thumbprint=D1:3E:EE:20:EB:B8:E4:35:7B:20:57:AA:0C:FF:19:07:D4:08:46:B2"></iframe>
 </div>
 </body>
 
